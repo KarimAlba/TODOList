@@ -1,0 +1,128 @@
+*{
+    font-family: 'Abhaya Libre', serif;
+}
+
+a,
+button{
+    cursor: pointer;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    text-align: center;
+}
+
+.App{
+    margin: 50px auto;
+    width: 40%;
+    background: #222222;
+    border-radius: 30px;
+}
+
+.titleOFApp{
+    margin: 0 9%;
+    display: flex;
+    justify-content: space-between;
+
+    h1{
+        color: #fff;
+    }
+}
+
+.redLine{
+    margin: 25px 0 0 0;
+    height: 40px;
+    width: 7px;
+    background-color: red;
+}
+
+.blueLine{
+    margin: 25px 0 0 0;
+    height: 40px;
+    width: 7px;
+    background-color: blue;
+}
+
+.yellowLine{
+    margin: 25px 0 0 0;
+    height: 40px;
+    width: 7px;
+    background-color: yellow;
+}
+
+.openedStatusClassName{
+    margin: auto;
+    width: 20px;
+    height: 20px;
+    background:#12121232 url(../assets/imgs/arrowBottom.svg);
+    background-position: -1px -1px;
+    border: none;
+    border-radius: 5px;
+}
+
+.closedStatusClassName{
+    margin: auto;
+    width: 20px;
+    height: 20px;
+    background:#F4F4F4;
+    border: none;
+    border-radius: 5px;
+}
+
+.switch {
+    margin: auto;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+.switchInput {
+    display:none;
+}
+  
+.slider{
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #366EFF;
+    box-shadow: inset 0px 0px 10px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    -webkit-transition: .2s;
+    transition: .2s;
+  }
+  
+.slider:before{
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background: #F4F4F4;
+    border-radius: 20px;
+    -webkit-transition: .4s;
+    transition: .2s;
+    background-image: url(../assets/imgs/switcherCanceled.svg);
+    background-repeat: no-repeat;
+    background-position: 6px 6px;
+}
+  
+.switchInput:checked + .slider{
+    background: #10C200;
+    box-shadow: inset 0px 0px 10px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+  
+.switchInput:checked + .slider:before{
+    background-image: url(../assets/imgs/switcherDone.svg);
+    background-repeat: no-repeat;
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}

@@ -1,8 +1,8 @@
-import './root/App.scss'
+import './App.scss'
 import React, { useState } from 'react'
 import TodayTaskComponent from './components/todayTasksComponent/TodayTasksComponent'
 import AllTasksComponent from './components/allTasksComponent/AllTasksComponent'
-import mechanic from './assets/imgs/mechanics.svg';
+import mechanic from './imgs/mechanics.svg';
 
 function App() {
   const allDays = [

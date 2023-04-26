@@ -1,0 +1,54 @@
+.openedTasks {
+    margin: 0px 0 20px 5%;
+    width: 90%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    background-color: #282828;
+    box-shadow: 16px 16px 20px rgba(0, 0, 0, 0.15), -8px -8px 20px rgba(255, 255, 255, 0.05);
+    border-radius: 40px;
+}
+
+.tasksCard {
+    margin: 0px 0 0px 5%;
+    height: 90px;
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    color: #fff;
+}
+
+.openedTaskTitle {
+    margin:0 0 0 2%;
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+
+    h3 {
+        font-size: 24px;
+        line-height: 20px;
+        color: #fff;
+    }
+}
+
+.textOfOpenedTask {
+    margin: 0 0 0 20px;
+    width: 70%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    text-align: left;
+
+    h3 {
+        margin: 0;
+        font-size: 24px;
+        line-height: 20px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+}
+
