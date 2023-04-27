@@ -4,19 +4,44 @@ import TodayTaskComponent from './components/todayTasksComponent/TodayTasksCompo
 import AllTasksComponent from './components/allTasksComponent/AllTasksComponent'
 import mechanic from './assets/imgs/mechanics.svg';
 
+class Day {
+  constructor(title, arrayOfTasks) {
+    this.title = title;
+    this.arrayOfTasks = arrayOfTasks;
+  }
+}
+
+class Task {
+  constructor(color, name) {
+    this.name = name;
+    this.color = color;
+    this.description = 'Lorem Ipsum Dolor Sit met...'
+  }
+}
+
+const today = new Day('Today Task', [
+    new Task('redLine', 'Visit David'),
+    new Task('blueLine', 'Goceries For Dinner'),
+    new Task('yellowLine', 'Fix Dad`s iPad'),
+  ]
+)
+
+const tomorrow = new Day('Tomorrow', [
+  new Task('redLine', 'Mmm Grechka'),
+  new Task('yellowLine', 'Breakfast with TambiMasaev'),
+]
+)
+
 function App() {
   const allDays = [
-      [    
-        {titleOfTask: 'Today Tasks', color: 'redLine', name: 'Visit David', description: 'Lorem Ipsum Dolor Sit met...'},
-        {color: 'blueLine', name: 'Goceries For Dinner', description: 'Lorem Ipsum Dolor Sit met...'},
-        {color: 'yellowLine', name: 'Fix Dad`s iPad', description: 'Lorem Ipsum Dolor Sit met...'},
-      ],
+    today,
+    tomorrow,
   ]
 
   // const [dayForRender, setDayForRender] = useState();
   // setDayForRender(allDays[0])
 
-  console.log(allDays[0])
+  console.log(allDays[1])
 
   return (
     <div className="App">
@@ -24,7 +49,7 @@ function App() {
         <h1>To Do</h1>
         <img src={mechanic}/>
       </div>
-      <TodayTaskComponent dayForRender={allDays[0]}/>
+      <TodayTaskComponent dayForRender={allDays[1]}/>
       <AllTasksComponent />
     </div>
   );

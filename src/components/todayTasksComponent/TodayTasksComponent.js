@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import todayTaskStyle from './TodayTasksComponent.module.scss';
 
 const TodayTask = (props) => {
+    const tasksForRender = props.dayForRender.arrayOfTasks;
     const [openedStatusClassName, setOpenedStatusClassName] = useState('openedStatusClassName');
-    const [selectedDayForRender, setSelectedDayForRender] = useState(props.dayForRender);
+    const [selectedDayForRender, setSelectedDayForRender] = useState(tasksForRender);
 
     const openedTasks = selectedDayForRender.map( (task) =>
         <div className={todayTaskStyle.tasksCard} key={task.color + task.name + 222}>
@@ -50,7 +51,7 @@ const TodayTask = (props) => {
                     className={openedStatusClassName} 
                     onClick={handlerButtonClick} 
                 />
-                <h3>Today Task:</h3>
+                <h3>{props.dayForRender.title + " "}:</h3>
             </div>
             <div className={todayTaskStyle.openedTasks}>{openedTasks}</div>
         </div>
