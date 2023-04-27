@@ -38,9 +38,11 @@ const TodayTask = (props) => {
 
     function handlerButtonClick() {
         if (openedStatusClassName == 'closedStatusClassName') {
-            setOpenedStatusClassName('openedStatusClassName');    
+            setOpenedStatusClassName('openedStatusClassName');
+            setSelectedDayForRender(tasksForRender);  
         } else {
-            setOpenedStatusClassName('closedStatusClassName'); 
+            setOpenedStatusClassName('closedStatusClassName');
+            setSelectedDayForRender([]);  
         }
     }
 
