@@ -27,30 +27,35 @@ const today = new Day('Today Task', [
 )
 
 const tomorrow = new Day('Tomorrow', [
-  new Task('redLine', 'Mmm Grechka'),
-  new Task('yellowLine', 'Breakfast with TambiMasaev'),
+    new Task('redLine', 'Mmm Grechka'),
+    new Task('yellowLine', 'Breakfast with TambiMasaev'),
+  ]
+)
+
+const firstMay = new Day('01/05 Tasks', [
+  new Task('blueLine', 'Yoga Class'),
+  new Task('blueLine', 'To Fix Up Z Car'),
+  new Task('yellowLine', 'Dinner With Anton Spraul'),
 ]
 )
 
 function App() {
   const allDays = [
-    today,
     tomorrow,
+    firstMay,
   ]
 
-  // const [dayForRender, setDayForRender] = useState();
-  // setDayForRender(allDays[0])
-
-  console.log(allDays[1])
+  const [nowADay, setNowADay] = useState(today);
+  const [allDaysForRender, setAllDaysForRender] = useState(allDays);
 
   return (
     <div className="App">
       <div className='titleOFApp'>
         <h1>To Do</h1>
-        <img src={mechanic}/>
+        <img src={mechanic} />
       </div>
-      <TodayTaskComponent dayForRender={allDays[1]}/>
-      <AllTasksComponent />
+      <TodayTaskComponent dayForRender={nowADay} />
+      <AllTasksComponent daysForRender={allDaysForRender} />
     </div>
   );
 }

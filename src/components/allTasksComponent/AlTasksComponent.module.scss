@@ -1,0 +1,52 @@
+*{
+    color: #ffff;
+}
+
+.containerOfDay{
+    margin: 10px 0 10px 5%;
+    width: 90%;
+    height: 90px;
+    display: flex;
+    justify-content: space-around;
+    background: #282828;
+    box-shadow: 16px 16px 20px rgba(0, 0, 0, 0.15), -8px -8px 20px rgba(255, 255, 255, 0.05);
+    border-radius: 25px;
+
+    h3{
+        margin: auto;
+        width: 70%;
+        text-align: left;
+        font-size: 30px;
+        line-height: 20px;
+    }
+
+    button{
+        margin: auto;
+        width: 25px;
+        height: 25px;
+        background-color: #28282810;
+        border: none;
+        background-position: 2px 2px;
+        background-repeat: no-repeat;
+        background-image: url(../../assets/imgs/circularArrowBottom.svg);
+    }
+
+    button:active{
+        border-radius: 14px;
+        border: 1px solid black; 
+    }
+}
+
+.grayLine{
+    margin: auto;
+    height: 40px;
+    width: 7px;
+    background: #A9A9A9;
+    border-radius: 3px;
+}
+
+.allTasks{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+}

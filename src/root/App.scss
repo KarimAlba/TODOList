@@ -27,6 +27,7 @@ body{
     justify-content: space-between;
 
     h1{
+        font-size: 35px;
         color: #fff;
     }
 }
@@ -36,6 +37,7 @@ body{
     height: 40px;
     width: 7px;
     background-color: red;
+    border-radius: 3px;
 }
 
 .blueLine{
@@ -43,13 +45,14 @@ body{
     height: 40px;
     width: 7px;
     background-color: blue;
+    border-radius: 3px;
 }
-
 .yellowLine{
     margin: 25px 0 0 0;
     height: 40px;
     width: 7px;
     background-color: yellow;
+    border-radius: 3px;
 }
 
 .openedStatusClassName{
