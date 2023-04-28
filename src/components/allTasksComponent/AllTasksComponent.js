@@ -1,55 +1,35 @@
-import allTasksStyles from '../allTasksComponent/AlTasksComponent.module.scss';
-import TodayTasksStyles from '../todayTasksComponent/TodayTasksComponent.module.scss'
+import allTasksStyles from '../allTasksComponent/AlTasksComponent.module.scss'
 import OpenedTasks from '../openedTaskComponent/OpenedTasksComponent'
-import React, { useState } from 'react'
 
 const AllTasksComponent = (props) => {
     const { daysForRender } = props;
+
     const allTasksBlocks = daysForRender.map(
         (day) => 
-        <div className={allTasksStyles.containerOfDay} key={12 + day.title + '12'}>
-            <div className={allTasksStyles.grayLine} key={day.title + '12' + 12} />
-            <h3 key={day.title + '12'}>
-                {day.title}
-            </h3>
-            <button key={day.title + '12' + 'button'} onClick={handleClick} />
+        <div key={21 + Number(new Date()) + day.title + 1234}>
+            <div className={allTasksStyles.containerOfDay} key={12 + day.title + '12'}>
+                <div className={allTasksStyles.grayLine} key={day.title + '12' + 12} />
+                <h3 key={day.title + '12'}>
+                    {day.title}
+                </h3>
+                <button key={day.title + '12' + 'button'} onClick={handleClick} />
+            </div>
+            <OpenedTasks openedTasks={day.arrayOfTasks}/> 
         </div>
     )
 
-    const openedTasksBlock = daysForRender.map(
-        (day) => 
-            <div className={allTasksStyles.openedTasksContainer} 
-                key={1 + day.title + String(new Date())}
-            >
-                <div className={TodayTasksStyles.openedTaskTitle} 
-                    key={2 + day.title + String(new Date())}
-                >
-                    <button key={day.title + String(new Date())} onClick={handleClick} />
-                    
-                    <h3 key={day.title + '21'+ String(new Date())} 
-                        className={allTasksStyles.dayTitle}
-                    >
-                        {day.title}
-                    </h3>
-                </div>
-                <OpenedTasks openedTasks={day.arrayOfTasks}/> 
-            </div>
-    )
-
-    const [elemForRender, setElemForRender] = useState(allTasksBlocks);
-
     function handleClick(e) {
-        if (elemForRender == allTasksBlocks) {
-            setElemForRender(openedTasksBlock);
-            console.log(elemForRender)
+        const card = e.target.parentNode.nextSibling;
+        if (card.style.display !== 'flex') {
+            card.style.display = 'flex'
         } else {
-            setElemForRender(allTasksBlocks);
+            card.style.display = 'none'
         }
     }
 
     return (
         <div className={allTasksStyles.allTasks}>
-           {elemForRender}
+           {allTasksBlocks}
         </div>
     )
 }

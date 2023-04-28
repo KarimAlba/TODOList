@@ -33,7 +33,7 @@ body{
 }
 
 .redLine{
-    margin: 25px 0 0 0;
+    margin: auto;
     height: 40px;
     width: 7px;
     background-color: red;
@@ -41,14 +41,14 @@ body{
 }
 
 .blueLine{
-    margin: 25px 0 0 0;
+    margin: auto;
     height: 40px;
     width: 7px;
     background-color: blue;
     border-radius: 3px;
 }
 .yellowLine{
-    margin: 25px 0 0 0;
+    margin: auto;
     height: 40px;
     width: 7px;
     background-color: yellow;
@@ -75,7 +75,7 @@ body{
 }
 
 .switch {
-    margin: auto;
+    margin: auto 0px;
     position: relative;
     display: inline-block;
     width: 60px;

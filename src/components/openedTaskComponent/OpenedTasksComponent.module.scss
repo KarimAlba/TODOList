@@ -1,7 +1,7 @@
 .openedTasks {
     margin: 0px 0 20px 5%;
     width: 90%;
-    display: flex;
+    display: none;
     flex-flow: column;
     justify-content: space-around;
     background-color: #282828;
@@ -10,7 +10,7 @@
 }
 
 .textOfOpenedTask {
-    margin: 0 0 0 20px;
+    margin: auto;
     width: 75%;
     display: flex;
     flex-flow: column;

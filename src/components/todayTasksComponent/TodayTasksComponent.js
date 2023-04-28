@@ -4,16 +4,17 @@ import OpenedTasks from '../openedTaskComponent/OpenedTasksComponent';
 
 const TodayTask = (props) => {
     const tasksForRender = props.dayForRender.arrayOfTasks;
-    const [openedStatusClassName, setOpenedStatusClassName] = useState('openedStatusClassName');
+    const [openedStatusClassName, setOpenedStatusClassName] = useState('closedStatusClassName');
     const [selectedDayForRender, setSelectedDayForRender] = useState(tasksForRender);
 
-    function handlerButtonClick() {
+    function handlerButtonClick(e) {
+        const card = e.target.parentNode.nextSibling;
         if (openedStatusClassName == 'closedStatusClassName') {
+            card.style.display = 'flex'
             setOpenedStatusClassName('openedStatusClassName');
-            setSelectedDayForRender(tasksForRender);  
         } else {
             setOpenedStatusClassName('closedStatusClassName');
-            setSelectedDayForRender([]);  
+            card.style.display = 'none'
         }
     }
 
