@@ -33,10 +33,10 @@ const tomorrow = new Day('Tomorrow', [
 )
 
 const firstMay = new Day('01/05 Tasks', [
-  new Task('blueLine', 'Yoga Class'),
-  new Task('blueLine', 'To Fix Up Z Car'),
-  new Task('yellowLine', 'Dinner With Anton Spraul'),
-]
+    new Task('blueLine', 'Yoga Class'),
+    new Task('blueLine', 'To Fix Up Z Car'),
+    new Task('yellowLine', 'Dinner With Anton Spraul'),
+  ]
 )
 
 function App() {
@@ -47,6 +47,20 @@ function App() {
 
   const [nowADay, setNowADay] = useState(today);
   const [allDaysForRender, setAllDaysForRender] = useState(allDays);
+
+  async function sendReq() {
+    let response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+    if (response.ok) {
+      let json = await response.json();
+      console.log(json)
+    } else {
+      alert("Ошибка HTTP: " + response.status);
+    }
+  }
+
+  sendReq();
+
+  console.log(nowADay);
 
   return (
     <div className="App">
