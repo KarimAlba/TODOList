@@ -1,8 +1,10 @@
 import '../root/App.scss'
+import axios, { all } from 'axios'
 import React, { useState } from 'react'
 import TodayTaskComponent from '../components/todayTasksComponent/TodayTasksComponent'
 import AllTasksComponent from '../components/allTasksComponent/AllTasksComponent'
-import mechanic from '../assets/imgs/mechanics.svg';
+import NewsComponent from '../components/newsComponent/NewsComponent'
+import CardOfNews from '../components/cardOfNewsComponent/CardOfNewsComponent'
 
 class Day {
   constructor(title, arrayOfTasks) {
@@ -45,31 +47,34 @@ function App() {
     firstMay,
   ]
 
+  let arrayOfTitles = []; 
+
   const [nowADay, setNowADay] = useState(today);
   const [allDaysForRender, setAllDaysForRender] = useState(allDays);
+  const [newsData, setNewsData] = useState(arrayOfTitles);
+  const [newsURL, setNewsURL] = useState('https://newsdata.io/api/1/news?country=de&apikey=pub_2148842010334e142d800e3d99be32c1e6789')
 
-  async function sendReq() {
-    let response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
-    if (response.ok) {
-      let json = await response.json();
-      console.log(json)
-    } else {
-      alert("Ошибка HTTP: " + response.status);
-    }
-  }
-
-  sendReq();
-
-  console.log(nowADay);
+ const getUrl = (url) => {
+  setNewsURL(url);
+  axios.get(newsURL).then((resp) => {
+    const data = resp.data.results;
+    data.forEach(element => {
+      arrayOfTitles.push(element.title);
+    });
+    let copy = Object.assign([], arrayOfTitles);
+    setNewsData(copy);
+  });
+ }
 
   return (
     <div className="App">
       <div className='titleOFApp'>
         <h1>To Do</h1>
-        <img src={mechanic} />
+        <NewsComponent getUrl = {getUrl}/>
       </div>
       <TodayTaskComponent dayForRender={nowADay} />
       <AllTasksComponent daysForRender={allDaysForRender} />
+      <CardOfNews news={newsData}/>
     </div>
   );
 }

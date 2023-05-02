@@ -1,0 +1,20 @@
+.modal{
+    margin: auto 0 auto 160px;
+    position: relative;
+}
+
+.openedModal{
+    width: 100px;
+    height: 30px;
+    position: absolute;
+    top: 60px;
+    left: -50px;
+    display: none;
+
+    button{
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        background-color: #201d1d4a;
+    }
+}
