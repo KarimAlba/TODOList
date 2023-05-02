@@ -54,8 +54,8 @@ function App() {
   const [newsData, setNewsData] = useState(arrayOfTitles);
   const [newsURL, setNewsURL] = useState('https://newsdata.io/api/1/news?country=de&apikey=pub_2148842010334e142d800e3d99be32c1e6789')
 
- const getUrl = (url) => {
-  setNewsURL(url);
+ const getUrl = () => {
+  setNewsURL('https://newsdata.io/api/1/news?country=de&apikey=pub_2148842010334e142d800e3d99be32c1e6789')
   axios.get(newsURL).then((resp) => {
     const data = resp.data.results;
     data.forEach(element => {
