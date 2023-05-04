@@ -4,31 +4,49 @@ import OpenedTasks from '../openedTaskComponent/OpenedTasksComponent';
 
 const TodayTask = (props) => {
     const tasksForRender = props.dayForRender.arrayOfTasks;
-    const [openedStatusClassName, setOpenedStatusClassName] = useState('closedStatusClassName');
     const [selectedDayForRender, setSelectedDayForRender] = useState(tasksForRender);
 
-    function handlerButtonClick(e) {
-        const card = e.target.parentNode.nextSibling;
-        if (openedStatusClassName == 'closedStatusClassName') {
-            card.style.display = 'flex'
-            setOpenedStatusClassName('openedStatusClassName');
-        } else {
-            setOpenedStatusClassName('closedStatusClassName');
-            card.style.display = 'none'
-        }
-    }
-
-    return (
+    const closedContainer = 
         <div className={todayTaskStyle.todayTask}>
             <div className={todayTaskStyle.openedTaskTitle}>
                 <button 
-                    className={openedStatusClassName} 
+                    className='closedStatusClassName'
+                    onClick={handlerButtonClick} 
+                />
+                <h3>{props.dayForRender.title + " "}:</h3>
+            </div>
+        </div>
+
+    const openedContainer = 
+        <div className={todayTaskStyle.todayTask}>
+            <div className={todayTaskStyle.openedTaskTitle}>
+                <button 
+                    className='openedStatusClassName'
                     onClick={handlerButtonClick} 
                 />
                 <h3>{props.dayForRender.title + " "}:</h3>
             </div>
             <OpenedTasks openedTasks = {selectedDayForRender}/>
         </div>
+
+    const [renderBlock, setRenderBlock] = useState(closedContainer);
+
+    function handlerButtonClick(e) {
+        e.preventDefault();
+        if (e.target.className == 'closedStatusClassName') {
+            e.target.className = 'openedStatusClassName';
+            setRenderBlock(openedContainer);
+        } else {
+            e.target.className = 'closedStatusClassName';
+            setRenderBlock(closedContainer);
+        }
+    }
+
+    return (
+        <div>
+            {renderBlock}
+        </div>
+
     )
 }
 
