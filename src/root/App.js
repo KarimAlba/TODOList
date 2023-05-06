@@ -1,58 +1,50 @@
 import '../root/App.scss'
 import axios, { all } from 'axios'
 import React, { useState } from 'react'
+import data from '../db/tasks.json'
 import TodayTaskComponent from '../components/todayTasksComponent/TodayTasksComponent'
 import AllTasksComponent from '../components/allTasksComponent/AllTasksComponent'
 import NewsComponent from '../components/newsComponent/NewsComponent'
 import CardOfNews from '../components/cardOfNewsComponent/CardOfNewsComponent'
-
-class Day {
-  constructor(title, arrayOfTasks) {
-    this.title = title;
-    this.arrayOfTasks = arrayOfTasks;
-  }
-}
-
-class Task {
-  constructor(color, name) {
-    this.name = name;
-    this.color = color;
-    this.description = 'Lorem Ipsum Dolor Sit met...'
-  }
-}
-
-const today = new Day('Today Task', [
-    new Task('redLine', 'Visit David'),
-    new Task('blueLine', 'Goceries For Dinner'),
-    new Task('yellowLine', 'Fix Dad`s iPad'),
-  ]
-)
-
-const tomorrow = new Day('Tomorrow', [
-    new Task('redLine', 'Mmm Grechka'),
-    new Task('yellowLine', 'Breakfast with TambiMasaev'),
-  ]
-)
-
-const firstMay = new Day('01/05 Tasks', [
-    new Task('blueLine', 'Yoga Class'),
-    new Task('blueLine', 'To Fix Up Z Car'),
-    new Task('yellowLine', 'Dinner With Anton Spraul'),
-  ]
-)
+var moment = require('moment');
 
 function App() {
-  const allDays = [
-    tomorrow,
-    firstMay,
-  ]
+  let arrayOfTitles = [];
+  const tasks = data.tasks
 
-  let arrayOfTitles = []; 
-
-  const [nowADay, setNowADay] = useState(today);
-  const [allDaysForRender, setAllDaysForRender] = useState(allDays);
+  const [allDaysForRender, setAllDaysForRender] = useState([]);
   const [newsData, setNewsData] = useState(arrayOfTitles);
   const [newsURL, setNewsURL] = useState('https://newsdata.io/api/1/news?country=de&apikey=pub_2148842010334e142d800e3d99be32c1e6789')
+  const days = [];
+
+  React.useEffect(
+    () => {
+      prepareArrayOfAllTasks(tasks);
+      let otherDays = days.slice(1, days.length);
+      setAllDaysForRender(otherDays);
+    }, []
+  )
+
+  tasks.sort((a, b) => moment(b.date, 'DD.MM.YY') - moment(a.date, 'DD.MM.YY'));
+  let today = tasks.slice(0, 3);
+
+  function prepareArrayOfAllTasks(arr) {
+    if (arr.length > 0) {
+      let lastIndex = arr.findLastIndex(item => item.date == arr[0].date);
+      const dayTasks = arr.splice(0, lastIndex+1);
+  
+      let copyOfSubArr = {dayTasks};
+      copyOfSubArr.title = dayTasks[0].date;
+      days.push(copyOfSubArr);
+      if (arr.length !== 0) {
+        prepareArrayOfAllTasks(arr);
+      } else {
+        return
+      }
+    } else {
+      return
+    }
+  }
 
  const getUrl = (url) => {
   setNewsURL(url);
@@ -72,7 +64,7 @@ function App() {
         <h1>To Do</h1>
         <NewsComponent getUrl = {getUrl}/>
       </div>
-      <TodayTaskComponent dayForRender={nowADay} />
+      <TodayTaskComponent dayForRender={today} />
       <AllTasksComponent daysForRender={allDaysForRender} />
       <CardOfNews news={newsData}/>
     </div>
