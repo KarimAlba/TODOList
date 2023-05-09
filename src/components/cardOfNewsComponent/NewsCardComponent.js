@@ -1,4 +1,4 @@
-import cardOfNewsStyles from '../cardOfNewsComponent/CardOfNewsComponent.module.scss'
+import cardOfNewsStyles from './CardOfNewsComponent.module.scss'
 
 const CardOfNews = (props) => {
     const allNews = props.news.map( 

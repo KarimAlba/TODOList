@@ -1,20 +1,15 @@
 import '../root/App.scss'
-import axios, { all } from 'axios'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import data from '../db/tasks.json'
 import TodayTaskComponent from '../components/todayTasksComponent/TodayTasksComponent'
 import AllTasksComponent from '../components/allTasksComponent/AllTasksComponent'
-import NewsComponent from '../components/newsComponent/NewsComponent'
-import CardOfNews from '../components/cardOfNewsComponent/CardOfNewsComponent'
+import Header from '../components/headerComponent/HeaderComponent'
+import NewsCard from '../components/newsCardComponent/NewsCardComponent'
 var moment = require('moment');
 
 function App() {
-  let arrayOfTitles = [];
-  const tasks = data.tasks
-
+  const tasks = data.tasks;
   const [allDaysForRender, setAllDaysForRender] = useState([]);
-  const [newsData, setNewsData] = useState(arrayOfTitles);
-  const [newsURL, setNewsURL] = useState('https://newsdata.io/api/1/news?country=de&apikey=pub_2148842010334e142d800e3d99be32c1e6789')
   const days = [];
 
   React.useEffect(
@@ -46,27 +41,27 @@ function App() {
     }
   }
 
- const getUrl = (url) => {
-  setNewsURL(url);
-  axios.get(newsURL).then((resp) => {
-    const data = resp.data.results;
-    data.forEach(element => {
-      arrayOfTitles.push(element.title);
-    });
-    let copy = Object.assign([], arrayOfTitles);
-    setNewsData(copy);
-  });
- }
+  const [stateOfNewsCard, setStateOfNewsCard] = useState(false);
+
+  function getStateOfNewsCard(state) {
+    setStateOfNewsCard(state);
+  }
+
+  const [arrOfNews, setArrOfNews] = useState([]);
+
+  function getNews(arr) {
+    setArrOfNews(Object.assign([], arr));
+  }
 
   return (
     <div className="App">
       <div className='titleOFApp'>
         <h1>To Do</h1>
-        <NewsComponent getUrl = {getUrl}/>
+        <Header getStateOfNewsCard={getStateOfNewsCard} getNews={getNews}/>
       </div>
       <TodayTaskComponent dayForRender={today} />
       <AllTasksComponent daysForRender={allDaysForRender} />
-      <CardOfNews news={newsData}/>
+      <NewsCard stateOfNewsCard={stateOfNewsCard} arrOfNews={arrOfNews}/>
     </div>
   );
 }
