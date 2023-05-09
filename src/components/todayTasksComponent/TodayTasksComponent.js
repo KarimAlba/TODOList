@@ -3,18 +3,18 @@ import todayTaskStyle from './TodayTasksComponent.module.scss';
 import OpenedTasks from '../openedTaskComponent/OpenedTasksComponent';
 
 const TodayTask = (props) => {
-    const tasksForRender = props.dayForRender.arrayOfTasks;
-    const [openedStatusClassName, setOpenedStatusClassName] = useState('closedStatusClassName');
-    const [selectedDayForRender, setSelectedDayForRender] = useState(tasksForRender);
+    const day = props.dayForRender;
+    const [selectedDayForRender, setSelectedDayForRender] = useState(day);
+    const [isOpened, setIsOpened] = useState(true);
 
     function handlerButtonClick(e) {
-        const card = e.target.parentNode.nextSibling;
-        if (openedStatusClassName == 'closedStatusClassName') {
-            card.style.display = 'flex'
-            setOpenedStatusClassName('openedStatusClassName');
+        e.preventDefault();
+        if (isOpened) {
+            e.target.className = 'closedStatusClassName';
+            setIsOpened(!isOpened);
         } else {
-            setOpenedStatusClassName('closedStatusClassName');
-            card.style.display = 'none'
+            e.target.className = 'openedStatusClassName';
+            setIsOpened(!isOpened);
         }
     }
 
@@ -22,12 +22,12 @@ const TodayTask = (props) => {
         <div className={todayTaskStyle.todayTask}>
             <div className={todayTaskStyle.openedTaskTitle}>
                 <button 
-                    className={openedStatusClassName} 
+                    className='openedStatusClassName'
                     onClick={handlerButtonClick} 
                 />
-                <h3>{props.dayForRender.title + " "}:</h3>
+                <h3>Today Tasks:</h3>
             </div>
-            <OpenedTasks openedTasks = {selectedDayForRender}/>
+            {isOpened? <OpenedTasks openedTasks={selectedDayForRender}/> : null}
         </div>
     )
 }

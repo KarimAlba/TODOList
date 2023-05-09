@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import openedTasksStyles from './OpenedTasksComponent.module.scss'
 
 const OpenedTasks = (props) => {
