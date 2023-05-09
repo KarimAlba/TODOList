@@ -1,16 +1,17 @@
-import cardOfNewsStyles from '../newsCardComponent/NewsCardComponent.module.scss'
+import NewsCardStyles from '../newsCardComponent/NewsCardComponent.module.scss'
+import React, { useState, useEffect } from 'react'
 
-const CardOfNews = (props) => {
-    const allNews = 
-    <div>
-        Hello
-    </div>
+const NewsCard = (props) => {
+    let blockOfNews = props.arrOfNews.map(
+        news => 
+        <h5 key={news.title + String(new Date()) + news.url}>{news.title}</h5>
+    )                
 
     return (
-        <div className='newsCard'>
-            {props.stateOfNewsCard ? allNews: null}
+        <div className={NewsCardStyles.newsCard}>
+            {props.stateOfNewsCard? blockOfNews: null}
         </div>
     )
 }
 
-export default CardOfNews;
+export default NewsCard;

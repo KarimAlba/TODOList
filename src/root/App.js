@@ -1,5 +1,4 @@
 import '../root/App.scss'
-import axios, { all } from 'axios'
 import React, { useState, useEffect } from 'react'
 import data from '../db/tasks.json'
 import TodayTaskComponent from '../components/todayTasksComponent/TodayTasksComponent'
@@ -43,21 +42,27 @@ function App() {
     }
   }
 
-  const [stateOfNewsCard, setStateOfNewsCard] = useState(false)
+  const [stateOfNewsCard, setStateOfNewsCard] = useState(false);
 
   function getStateOfNewsCard(state) {
     setStateOfNewsCard(state);
+  }
+
+  const [arrOfNews, setArrOfNews] = useState([]);
+
+  function getNews(arr) {
+    setArrOfNews(Object.assign([], arr));
   }
 
   return (
     <div className="App">
       <div className='titleOFApp'>
         <h1>To Do</h1>
-        <Header getStateOfNewsCard={getStateOfNewsCard}/>
+        <Header getStateOfNewsCard={getStateOfNewsCard} getNews={getNews}/>
       </div>
       <TodayTaskComponent dayForRender={today} />
       <AllTasksComponent daysForRender={allDaysForRender} />
-      <NewsCard stateOfNewsCard={stateOfNewsCard}/>
+      <NewsCard stateOfNewsCard={stateOfNewsCard} arrOfNews={arrOfNews}/>
     </div>
   );
 }
