@@ -5,32 +5,26 @@ import TodayTaskComponent from '../components/todayTasksComponent/TodayTasksComp
 import AllTasksComponent from '../components/allTasksComponent/AllTasksComponent'
 import Header from '../components/headerComponent/HeaderComponent'
 import NewsCard from '../components/newsCardComponent/NewsCardComponent'
-var moment = require('moment');
+import moment from 'moment';
 
-function App() {
-  const tasks = data.tasks;
-  const [allDaysForRender, setAllDaysForRender] = useState([]);
-  const days = [];
+const App = () => {
 
-  React.useEffect(
-    () => {
-      prepareArrayOfAllTasks(tasks);
-      let otherDays = days.slice(1, days.length);
-      setAllDaysForRender(otherDays);
-    }, []
-  )
+  const [todayTasks, setTodayTasks] = useState(data.tasks.slice(0, 3));
 
-  tasks.sort((a, b) => moment(b.date, 'DD.MM.YY') - moment(a.date, 'DD.MM.YY'));
-  let today = tasks.slice(0, 3);
+  const [allTasks, setAllTasks] = useState(data.tasks.sort((a, b) => moment(b.date, 'DD.MM.YY') - moment(a.date, 'DD.MM.YY')));
 
-  function prepareArrayOfAllTasks(arr) {
+  const [allDaysForRender, setAllDaysForRender] = useState([]); // без today
+
+  const [daysContainer, setDaysContainer] = useState([]);
+
+  const prepareArrayOfAllTasks = (arr) => {
     if (arr.length > 0) {
       let lastIndex = arr.findLastIndex(item => item.date == arr[0].date);
       const dayTasks = arr.splice(0, lastIndex+1);
   
       let copyOfSubArr = {dayTasks};
       copyOfSubArr.title = dayTasks[0].date;
-      days.push(copyOfSubArr);
+      setDaysContainer(daysContainer.push(copyOfSubArr));
       if (arr.length !== 0) {
         prepareArrayOfAllTasks(arr);
       } else {
@@ -43,25 +37,26 @@ function App() {
 
   const [stateOfNewsCard, setStateOfNewsCard] = useState(false);
 
-  function getStateOfNewsCard(state) {
-    setStateOfNewsCard(state);
-  }
+  const getStateOfNewsCard = () => setStateOfNewsCard(!stateOfNewsCard);
 
-  const [arrOfNews, setArrOfNews] = useState([]);
-
-  function getNews(arr) {
-    setArrOfNews(Object.assign([], arr));
-  }
+  React.useEffect(
+    () => {
+      prepareArrayOfAllTasks(allTasks);
+      let otherDays = daysContainer.slice(1, daysContainer.length);
+      setAllDaysForRender(otherDays);
+    },
+    []
+  );
 
   return (
     <div className="App">
-      <div className='titleOFApp'>
+      <div className='app-title'>
         <h1>To Do</h1>
-        <Header getStateOfNewsCard={getStateOfNewsCard} getNews={getNews}/>
+        <Header getStateOfNewsCard={getStateOfNewsCard} />
       </div>
-      <TodayTaskComponent dayForRender={today} />
+      <TodayTaskComponent dayForRender={todayTasks} />
       <AllTasksComponent daysForRender={allDaysForRender} />
-      <NewsCard stateOfNewsCard={stateOfNewsCard} arrOfNews={arrOfNews}/>
+      {stateOfNewsCard ? <NewsCard/> : null}
     </div>
   );
 }

@@ -1,0 +1,29 @@
+.text-opened-task {
+    margin: auto;
+    width: 75%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    text-align: left;
+
+    h3 {
+        margin: 0;
+        font-size: 30px;
+        line-height: 20px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+}
+
+.tasks-card {
+    margin: 0px 0 0px 5%;
+    height: 90px;
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    color: #fff;
+}

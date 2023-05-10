@@ -1,4 +1,13 @@
-.openedTaskTitle {
+.today-tasks{
+    margin: 10px 0 10px 5%;
+    width: 90%;
+    min-height: 90px;
+    background: #282828;
+    box-shadow: 16px 16px 20px rgba(0, 0, 0, 0.15), -8px -8px 20px rgba(255, 255, 255, 0.05);
+    border-radius: 25px;
+}
+
+.task-title {
     margin:0 0 10px 2%;
     width: 40%;
     display: flex;
