@@ -14,10 +14,9 @@ const NewsCard = (props) => {
     }, [])
 
     const sendRequest = (firstIndex) => {
-        let apiUrl = 'https://newsdata.io/api/1/news?apikey=pub_2148842010334e142d800e3d99be32c1e6789&q=cryptocurrency';
+        let apiUrl = 'https://jsonplaceholder.typicode.com/comments';
         axios.get(apiUrl).then((resp) => {
-            console.log(resp.data)
-            let newsForRender = resp.data.results;
+            let newsForRender = resp.data;
             let renderNews = newsForRender.slice(firstIndex, firstIndex + 2);
             setArrOfNews(renderNews);
         });
@@ -26,8 +25,8 @@ const NewsCard = (props) => {
     return (
         <div className={NewsCardStyles['news-card']}>
             {arrOfNews.map(news => 
-                <h5 key={news.title + String(new Date()) + news.url}>
-                    {news.title}
+                <h5 key={news.id + String(new Date()) + news.email}>
+                    {news.name}
                 </h5>
             )}
         </div>
