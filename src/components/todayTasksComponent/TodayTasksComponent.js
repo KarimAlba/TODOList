@@ -7,22 +7,22 @@ const TodayTask = (props) => {
     const [selectedDayForRender, setSelectedDayForRender] = useState(day);
     const [isOpened, setIsOpened] = useState(true);
 
-    function handlerButtonClick(e) {
+    const handlerButtonClick = (e) => {
         e.preventDefault();
         if (isOpened) {
-            e.target.className = 'closedStatusClassName';
+            e.target.className = 'closed-button';
             setIsOpened(!isOpened);
         } else {
-            e.target.className = 'openedStatusClassName';
+            e.target.className = 'opened-button';
             setIsOpened(!isOpened);
         }
     }
 
     return (
-        <div className={todayTaskStyle.todayTask}>
-            <div className={todayTaskStyle.openedTaskTitle}>
+        <div className={todayTaskStyle['today-tasks']}>
+            <div className={todayTaskStyle['task-title']}>
                 <button 
-                    className='openedStatusClassName'
+                    className='opened-button'
                     onClick={handlerButtonClick} 
                 />
                 <h3>Today Tasks:</h3>
