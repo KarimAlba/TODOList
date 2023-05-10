@@ -7,15 +7,15 @@ import Header from '../components/headerComponent/HeaderComponent'
 import NewsCard from '../components/newsCardComponent/NewsCardComponent'
 import moment from 'moment';
 
-function App() {
+const App = () => {
 
   const [todayTasks, setTodayTasks] = useState(data.tasks.slice(0, 3));
+
   const [allTasks, setAllTasks] = useState(data.tasks.sort((a, b) => moment(b.date, 'DD.MM.YY') - moment(a.date, 'DD.MM.YY')));
 
-  const [allDaysForRender, setAllDaysForRender] = useState([]);
-  const days = [];
+  const [allDaysForRender, setAllDaysForRender] = useState([]); // без today
 
-  //мб days тоже в состояние и его расширять потом в функции ниже
+  const [daysContainer, setDaysContainer] = useState([]);
 
   const prepareArrayOfAllTasks = (arr) => {
     if (arr.length > 0) {
@@ -24,7 +24,7 @@ function App() {
   
       let copyOfSubArr = {dayTasks};
       copyOfSubArr.title = dayTasks[0].date;
-      days.push(copyOfSubArr);
+      setDaysContainer(daysContainer.push(copyOfSubArr));
       if (arr.length !== 0) {
         prepareArrayOfAllTasks(arr);
       } else {
@@ -42,7 +42,7 @@ function App() {
   React.useEffect(
     () => {
       prepareArrayOfAllTasks(allTasks);
-      let otherDays = days.slice(1, days.length);
+      let otherDays = daysContainer.slice(1, daysContainer.length);
       setAllDaysForRender(otherDays);
     },
     []

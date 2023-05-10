@@ -1,6 +1,6 @@
 import NewsCardStyles from '../newsCardComponent/NewsCardComponent.module.scss'
 import React, { useState, useEffect } from 'react'
-import axios, { all } from 'axios'
+import axios from 'axios'
 
 const NewsCard = (props) => {
     const [arrOfNews, setArrOfNews] = useState([]);
@@ -14,9 +14,10 @@ const NewsCard = (props) => {
     }, [])
 
     const sendRequest = (firstIndex) => {
-        let apiUrl = 'https://newsapi.org/v2/everything?q=tesla&from=2023-04-10&sortBy=publishedAt&apiKey=1361bc18264e42b0ba06f94e0084c7b7';
+        let apiUrl = 'https://newsdata.io/api/1/news?apikey=pub_2148842010334e142d800e3d99be32c1e6789&q=cryptocurrency';
         axios.get(apiUrl).then((resp) => {
-            let newsForRender = resp.data.articles;
+            console.log(resp.data)
+            let newsForRender = resp.data.results;
             let renderNews = newsForRender.slice(firstIndex, firstIndex + 2);
             setArrOfNews(renderNews);
         });
