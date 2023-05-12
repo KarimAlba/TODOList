@@ -8,28 +8,28 @@ import NewsCard from '../components/newsCardComponent/NewsCardComponent'
 import moment from 'moment';
 
 const App = () => {
-
-  const [todayTasks, setTodayTasks] = useState(data.tasks.slice(0, 3));
-
-  const [allTasks, setAllTasks] = useState(data.tasks.sort((a, b) => moment(b.date, 'DD.MM.YY') - moment(a.date, 'DD.MM.YY')));
-
-  const [allDaysForRender, setAllDaysForRender] = useState([]); // без today
+  const [todayTasks, setTodayTasks] = useState([]);
 
   const [daysContainer, setDaysContainer] = useState([]);
 
+
+
+  const findActualTasks = (arr) => {
+    let actualTasks = arr.filter(item => new Date(item.date).toLocaleDateString('en-ca') > new Date().toLocaleDateString('en-ca'));
+    return actualTasks;
+  }
+
   const prepareArrayOfAllTasks = (arr) => {
-    if (arr.length > 0) {
-      let lastIndex = arr.findLastIndex(item => item.date == arr[0].date);
-      const dayTasks = arr.splice(0, lastIndex+1);
-  
-      let copyOfSubArr = {dayTasks};
-      copyOfSubArr.title = dayTasks[0].date;
-      setDaysContainer(daysContainer.push(copyOfSubArr));
-      if (arr.length !== 0) {
-        prepareArrayOfAllTasks(arr);
-      } else {
-        return
-      }
+    let index = arr.findLastIndex(item => item.date == arr[0].date);
+    let splicedArr = arr.splice(0, index + 1);
+    let day = {};
+    day.dayTasks = splicedArr;
+    day.title = splicedArr[0].date;
+    let copy = Object.assign([], daysContainer);
+    copy.push(day);
+    setDaysContainer(copy);
+    if (arr.length !== 0) {
+      prepareArrayOfAllTasks(arr);
     } else {
       return
     }
@@ -39,11 +39,36 @@ const App = () => {
 
   const getStateOfNewsCard = () => setStateOfNewsCard(!stateOfNewsCard);
 
-  React.useEffect(
+  const markTask = (id) => {
+    const dayIndex = daysContainer.findIndex(item => item.dayTasks.find(task => task.id === id));
+    const taskIndex = daysContainer[dayIndex].dayTasks.findIndex(task => task.id === id);
+    if (dayIndex !== -1 && taskIndex !== -1) {
+      const taskCopy = {
+        ...daysContainer[dayIndex].dayTasks[taskIndex],
+        done: !daysContainer[dayIndex].dayTasks[taskIndex].done
+      };
+      setDaysContainer([
+        ...daysContainer.slice(0, dayIndex),
+        {
+          ...daysContainer[dayIndex],
+          dayTasks: [
+            ...daysContainer[dayIndex].dayTasks.slice(0, taskIndex),
+            taskCopy,
+            ...daysContainer[dayIndex].dayTasks.slice(taskIndex + 1),
+          ],
+        },
+        ...daysContainer.slice(dayIndex + 1),
+      ])
+    }
+  };
+
+  useEffect(
     () => {
-      prepareArrayOfAllTasks(allTasks);
-      let otherDays = daysContainer.slice(1, daysContainer.length);
-      setAllDaysForRender(otherDays);
+      setTodayTasks( data.tasks.filter(item => item.date == new Date().toLocaleDateString('en-ca')));
+      setTimeout(() => {
+        const actualTasks = findActualTasks(data.tasks);
+        prepareArrayOfAllTasks(actualTasks);
+      }, 0);
     },
     []
   );
@@ -54,8 +79,8 @@ const App = () => {
         <h1>To Do</h1>
         <Header getStateOfNewsCard={getStateOfNewsCard} />
       </div>
-      <TodayTaskComponent dayForRender={todayTasks} />
-      <AllTasksComponent daysForRender={allDaysForRender} />
+      <TodayTaskComponent todayTasks={todayTasks} />
+      <AllTasksComponent daysContainer={daysContainer} onTaskMarked={(id) => markTask(id)} />
       {stateOfNewsCard ? <NewsCard/> : null}
     </div>
   );

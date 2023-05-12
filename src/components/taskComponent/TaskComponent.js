@@ -1,12 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import taskStyles from './TaskComponent.module.scss'
 
 const Task = (props) => {
-    const { task } = props;
-    const [lineThrow, setLineThrow] = useState(false);
 
     const handleSwitchClick = (e) => {
-        setLineThrow(!lineThrow);
+        e.preventDefault();
+        props.onTaskMarked();
+    }
+
+    const task = useMemo(() => {
+        return props.task;
+    }, [props.task.done]);
+
+    const lineThrow = useMemo(() => {
+        return props.task.done;
+    }, [props.task.done]);
+
+    const handleInputChange = (e) => {
+        e.preventDefault();
     }
 
     return (
@@ -25,8 +36,8 @@ const Task = (props) => {
                 </p>
             </div>
                 <label className='switch'>
-                    <input type="checkbox" className='switch-input'/>
-                    <span className='slider round'  onClick={handleSwitchClick}></span>
+                    <input type="checkbox" checked={task.done} className='switch-input' onChange={handleInputChange}/>
+                    <span className='slider round' onClick={handleSwitchClick}></span>
                 </label>
         </div>
     )

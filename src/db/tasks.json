@@ -2,59 +2,91 @@
     "tasks": [
         {
             "id": 165166167,
-            "date": "05.05.2023",
+            "date": "2023-05-05",
             "name": "Visit David",
             "color": "red-line",
-            "description": "Lorem Ipsum Dolor Sit met..."
+            "description": "Lorem Ipsum Dolor Sit met...",
+            "done": false
         },
         {
             "id": 166167168,
-            "date": "05.05.2023",
+            "date": "2023-05-05",
             "name": "Goceries For Dinner",
             "color": "blue-line",
-            "description": "Lorem Ipsum Dolor Sit met..."
+            "description": "Lorem Ipsum Dolor Sit met...",
+            "done": false
         },
         {
             "id": 167168169,
-            "date": "05.05.2023",
+            "date": "2023-05-05",
             "name": "Fix Dad`s iPad",
             "color": "yellow-line",
-            "description": "Lorem Ipsum Dolor Sit met..."
+            "description": "Lorem Ipsum Dolor Sit met...",
+            "done": false
         },
         {
             "id": 168169170,
-            "date": "02.05.2023",
+            "date": "2023-05-02",
             "name": "Yoga Class",
             "color": "blue-line",
-            "description": "Lorem Ipsum Dolor Sit met..."
+            "description": "Lorem Ipsum Dolor Sit met...",
+            "done": false
         },
         {
             "id": 169170171,
-            "date": "01.05.2023",
+            "date": "2023-05-02",
             "name": "Mmm Grechka",
             "color": "red-line",
-            "description": "Lorem Ipsum Dolor Sit met..."
+            "description": "Lorem Ipsum Dolor Sit met...",
+            "done": false
         },
         {
             "id": 171172173,
-            "date": "01.05.2023",
+            "date": "2023-05-01",
             "name": "Breakfast with TambiMasaev",
             "color": "yellow-line",
-            "description": "Lorem Ipsum Dolor Sit met..."
+            "description": "Lorem Ipsum Dolor Sit met...",
+            "done": false
+        },
+        {
+            "id": 183184185,
+            "date": "2023-05-12",
+            "name": "Running",
+            "color": "red-line",
+            "description": "Lorem Ipsum Dolor Sit met...",
+            "done": false
+        },
+        {
+            "id": 184185186,
+            "date": "2023-05-12",
+            "name": "Breakfast",
+            "color": "yellow-line",
+            "description": "Lorem Ipsum Dolor Sit met...",
+            "done": false
+        },
+        {
+            "id": 185186187,
+            "date": "2023-05-12",
+            "name": "Volleyball",
+            "color": "blue-line",
+            "description": "Lorem Ipsum Dolor Sit met...",
+            "done": false
         },
         {
             "id": 172173174,
-            "date": "02.05.2023",
+            "date": "2023-05-14",
             "name": "To Fix Up Z Car",
             "color": "blue-line",
-            "description": "Lorem Ipsum Dolor Sit met..."
+            "description": "Lorem Ipsum Dolor Sit met...",
+            "done": false
         },
         {
             "id": 175176177,
-            "date": "02.05.2023",
+            "date": "2023-05-14",
             "name": "Dinner With Anton Spraul",
-            "color": "red-line",
-            "description": "Lorem Ipsum Dolor Sit met..."
+            "color": "yellow-line",
+            "description": "Lorem Ipsum Dolor Sit met...",
+            "done": false
         }
     ]
 }

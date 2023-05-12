@@ -3,8 +3,7 @@ import todayTaskStyle from './TodayTasksComponent.module.scss';
 import OpenedTasks from '../openedTaskComponent/OpenedTasksComponent';
 
 const TodayTask = (props) => {
-    const day = props.dayForRender;
-    const [selectedDayForRender, setSelectedDayForRender] = useState(day);
+    const tasks = props.todayTasks;
     const [isOpened, setIsOpened] = useState(true);
 
     const handlerButtonClick = (e) => {
@@ -27,7 +26,7 @@ const TodayTask = (props) => {
                 />
                 <h3>Today Tasks:</h3>
             </div>
-            {isOpened? <OpenedTasks openedTasks={selectedDayForRender}/> : null}
+            {isOpened? <OpenedTasks tasks={tasks} /> : null}
         </div>
     )
 }
