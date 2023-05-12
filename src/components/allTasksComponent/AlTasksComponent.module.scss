@@ -2,53 +2,6 @@
     color: #ffff;
 }
 
-.days-container{
-    margin: 10px 0 10px 5%;
-    width: 90%;
-    min-height: 90px;
-    background: #282828;
-    box-shadow: 16px 16px 20px rgba(0, 0, 0, 0.15), -8px -8px 20px rgba(255, 255, 255, 0.05);
-    border-radius: 25px;
-
-    .task-header {
-        height: 90px;
-        display: flex;
-        justify-content: space-around;
-    }
-
-    h3{
-        margin: auto 0px;
-        width: 65%;
-        text-align: left;
-        font-size: 30px;
-        line-height: 20px;
-    }
-
-    button{
-        margin: auto 40px;
-        width: 25px;
-        height: 25px;
-        background-color: #28282810;
-        border: none;
-        background-position: 2px 2px;
-        background-repeat: no-repeat;
-        background-image: url(../../assets/imgs/circularArrowBottom.svg);
-    }
-    
-    button:active{
-        border-radius: 14px;
-        border: 1px solid black; 
-    }
-}
-
-.gray-line{
-    margin: auto;
-    height: 40px;
-    width: 7px;
-    background: #A9A9A9;
-    border-radius: 3px;
-}
-
 .all-tasks{
     display: flex;
     flex-flow: column;
