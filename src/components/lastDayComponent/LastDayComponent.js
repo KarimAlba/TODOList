@@ -1,6 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import OpenedTasks from '../openedTaskComponent/OpenedTasksComponent'
 import styles from './LastDayComponent.module.scss'
+
+console.log('last')
 
 const Day = (props) => {
     const [isOpened, setIsOpened] = useState(false);
@@ -10,21 +12,17 @@ const Day = (props) => {
         setIsOpened(!isOpened);
     }
 
-    const day = useMemo(() => {
-        return props.day;
-    }, [props.day.dayTasks]);
-
     return (
         <div>
             <div className={styles['days-container']} >
                 <div className={styles['task-header']}>
                     <div className={styles['gray-line']}></div>
                     <h3>
-                        {(new Date(day.title)).toLocaleDateString()}
+                        {(new Date(props.day.title)).toLocaleDateString()}
                     </h3>
                     <button onClick={handleButtonClick} />
                 </div>
-                {isOpened ? <OpenedTasks tasks={day.dayTasks} onTaskMarked={(id) => props.onTaskMarked(id)} /> : null}
+                {isOpened ? <OpenedTasks tasks={props.day.dayTasks} onTaskMarked={(id) => props.onTaskMarked(id)} /> : null}
             </div>
         </div>
     )

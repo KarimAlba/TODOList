@@ -26,7 +26,7 @@ const TodayTask = (props) => {
                 />
                 <h3>Today Tasks:</h3>
             </div>
-            {isOpened? <OpenedTasks tasks={tasks} /> : null}
+            {isOpened? <OpenedTasks tasks={tasks} onTaskMarked={(id) => props.onTaskMarked(id)} /> : null}
         </div>
     )
 }

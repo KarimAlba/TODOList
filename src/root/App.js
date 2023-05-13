@@ -5,17 +5,16 @@ import TodayTaskComponent from '../components/todayTasksComponent/TodayTasksComp
 import AllTasksComponent from '../components/allTasksComponent/AllTasksComponent'
 import Header from '../components/headerComponent/HeaderComponent'
 import NewsCard from '../components/newsCardComponent/NewsCardComponent'
-import moment from 'moment';
 
 const App = () => {
   const [todayTasks, setTodayTasks] = useState([]);
 
   const [daysContainer, setDaysContainer] = useState([]);
 
-
-
   const findActualTasks = (arr) => {
-    let actualTasks = arr.filter(item => new Date(item.date).toLocaleDateString('en-ca') > new Date().toLocaleDateString('en-ca'));
+    let actualTasks = arr.filter(item => 
+      new Date(item.date).toLocaleDateString('en-ca') > new Date().toLocaleDateString('en-ca')
+    );
     return actualTasks;
   }
 
@@ -62,9 +61,22 @@ const App = () => {
     }
   };
 
+  const markTodayTasks = (id) => {
+    let index = todayTasks.findIndex(item => item.id === id);
+    let copyTask = {
+      ...todayTasks[index],
+      done: !todayTasks[index].done
+    }
+    setTodayTasks([
+      ...todayTasks.slice(0, index), 
+      copyTask,
+      ...todayTasks.slice(index + 1)
+    ])
+  }
+
   useEffect(
     () => {
-      setTodayTasks( data.tasks.filter(item => item.date == new Date().toLocaleDateString('en-ca')));
+      setTodayTasks(data.tasks.filter(item => item.date == new Date().toLocaleDateString('en-ca')));
       setTimeout(() => {
         const actualTasks = findActualTasks(data.tasks);
         prepareArrayOfAllTasks(actualTasks);
@@ -79,7 +91,7 @@ const App = () => {
         <h1>To Do</h1>
         <Header getStateOfNewsCard={getStateOfNewsCard} />
       </div>
-      <TodayTaskComponent todayTasks={todayTasks} />
+      <TodayTaskComponent todayTasks={todayTasks} onTaskMarked={(id) => markTodayTasks(id)} />
       <AllTasksComponent daysContainer={daysContainer} onTaskMarked={(id) => markTask(id)} />
       {stateOfNewsCard ? <NewsCard/> : null}
     </div>
