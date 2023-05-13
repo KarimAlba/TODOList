@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import taskStyles from './TaskComponent.module.scss'
 
 const Task = (props) => {
